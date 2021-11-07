@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-header">Solicitudes</div>
+  <div class="card-body">
+    <h5 class="card-title">Listado de Solicitudes</h5>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>titulo</th>
+          <th>descripcion</th>
+          <th>estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let solicitud of solicitudes">
+          <td>{{solicitud.id}}</td>
+          <td>{{solicitud.titulo}}</td>
+          <td>{{solicitud.desTitulo}}</td>
+          <td>{{solicitud.estado}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
