@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
-import { SOLICITUDES } from './solicitudes.json';
 import { Solicitud } from './solicitud';
-import { of, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SolicitudService {
+  private urlEndPoint:string = 'http://localhost:8080/apiSolic/solicitudes';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getSolicitudes(): Observable<Solicitud[]>{
-    return of(SOLICITUDES);
+    return this.http.get(this.urlEndPoint).pipe(
+      map(response => response as Solicitud[])
+    );
   }
 }
