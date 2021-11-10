@@ -8,10 +8,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { RouterModule, Routes} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FormComponent } from './solicitudes/form.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: '', redirectTo: '/solicitudes',pathMatch:'full'},
   {path: 'solicitudes', component:SolicitudesComponent},
+  {path: 'solicitudes/form', component:FormComponent},
 ];
 
 @NgModule({
@@ -20,11 +23,13 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     NavbarComponent,
-    SolicitudesComponent
+    SolicitudesComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
