@@ -13,6 +13,7 @@
           <th>titulo</th>
           <th>descripcion</th>
           <th>estado</th>
+          <th>Editar</th>
         </tr>
       </thead>
       <tbody>
@@ -21,6 +22,10 @@
           <td>{{solicitud.titulo}}</td>
           <td>{{solicitud.desTitulo}}</td>
           <td>{{solicitud.estado}}</td>
+          <td>
+            <button type="button" name="button" [routerLink]="['/solicitudes/form',solicitud.id]"
+                class="btn btn-primary">editar</button>
+          </td>
         </tr>
       </tbody>
     </table>

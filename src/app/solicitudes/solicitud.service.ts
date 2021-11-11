@@ -22,4 +22,16 @@ export class SolicitudService {
   create(solicitud: Solicitud): Observable<Solicitud>{
     return this.http.post<Solicitud>(this.urlEndPoint, solicitud, {headers: this.httpHeaders})
   }
+
+  /*--------------------------
+  Metodo para buscar una solicitud por ID
+  ----------------------------*/
+  getSolicitud(id:any): Observable<Solicitud>{
+    return this.http.get<Solicitud>(`${this.urlEndPoint}/${id}`)
+  }
+
+  update(solicitud: Solicitud): Observable<Solicitud>{
+    return this.http.put<Solicitud>(`${this.urlEndPoint}/${solicitud.id}`,
+      solicitud,{headers: this.httpHeaders})
+  }
 }

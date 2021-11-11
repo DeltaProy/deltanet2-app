@@ -6,7 +6,7 @@
           <h5>Creacion de Solicitudes :: <small>Requerimientos o peticiones de usuarios.</small></h5>
         </div>
         <div class="ibox-content">
-          <form (ngSubmit) = "create()" class="form-horizontal">
+          <form class="form-horizontal">
             <div class="form-group">
               <label for="titulo" class="col-sm-2 control-label">Titulo</label>
               <div class="col-sm-10">
@@ -27,7 +27,12 @@
 
             <div class="form-group">
               <div class="col-sm-4 col-sm-offset-2">
-                <button class="btn btn-primary" role="button">Grabar cambios</button>
+                <button class="btn btn-primary" role="button"
+                  (click)='create()' *ngIf="!solicitud.id else elseBlock">Grabar cambios</button>
+                <ng-template #elseBlock>
+                  <button class="btn btn-primary" role="button"
+                    (click)='update()'>Edidar</button>
+                </ng-template>
               </div>
             </div>
           </form>
