@@ -11,6 +11,7 @@ import swal from 'sweetalert2';
 export class FormComponent implements OnInit {
   public solicitud: Solicitud = new Solicitud();
   public titulo: string = 'Crear Solicitud';
+  public errores: string[];
 
   constructor(private solicitudService: SolicitudService,
               private activatedRoute: ActivatedRoute,
@@ -25,7 +26,11 @@ export class FormComponent implements OnInit {
     .subscribe(solicitud => {
       this.router.navigate(['/solicitudes'])
       swal('Nueva Solicitud',`Solicituid ${solicitud.titulo} creado con éxito!`,'success')
-    })
+    },
+    err => {
+      this.errores = err.error.errors as string[];
+    }
+  )
   }
 
   cargarSolicitud():void {
@@ -45,7 +50,11 @@ export class FormComponent implements OnInit {
 
           swal('Solicitud actualizada',
              `Solicitud ${solicitud.id} acualizada con éxito!`,'success')
-        })
+        },
+        err => {
+          this.errores = err.error.errors as string[];
+        }
+      )
   }
 
 }

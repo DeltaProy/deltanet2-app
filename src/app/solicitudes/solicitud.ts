@@ -3,4 +3,5 @@ export class Solicitud {
   titulo: string;
   desTitulo: string;
   estado: string;
+  createAt: string;
 }

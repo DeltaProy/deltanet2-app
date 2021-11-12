@@ -6,7 +6,10 @@
       <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/solicitudes/form']">
         Crear Solicitud</button>
     </div>
-    <table class="table table-bordered table-striped">
+    <div *ngIf="solicitudes?.length==0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <table class="table table-bordered table-striped" *ngIf="solicitudes?.length>0">
       <thead>
         <tr>
           <th>id</th>
@@ -14,6 +17,7 @@
           <th>descripcion</th>
           <th>estado</th>
           <th>Editar</th>
+          <th>Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +29,10 @@
           <td>
             <button type="button" name="button" [routerLink]="['/solicitudes/form',solicitud.id]"
                 class="btn btn-primary">editar</button>
+          </td>
+          <td>
+            <button type="button" name="eliminar" (click)='delete(solicitud)'
+               class="btn btn-danger btn-sm">eliminar</button>
           </td>
         </tr>
       </tbody>
