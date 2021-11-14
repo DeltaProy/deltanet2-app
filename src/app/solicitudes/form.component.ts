@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Solicitud } from './solicitud';
+import { Area } from './area';
 import { SolicitudService} from './solicitud.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
@@ -10,6 +11,7 @@ import swal from 'sweetalert2';
 })
 export class FormComponent implements OnInit {
   public solicitud: Solicitud = new Solicitud();
+  areas:Area[];
   public titulo: string = 'Crear Solicitud';
   public errores: string[];
 
@@ -19,6 +21,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarSolicitud();
+    this.solicitudService.getAreas().subscribe(areas => this.areas= areas);
   }
 
   public create(): void{
@@ -55,6 +58,17 @@ export class FormComponent implements OnInit {
           this.errores = err.error.errors as string[];
         }
       )
+  }
+
+  compararArea(o1:Area, o2:Area):boolean{
+    /*-------------------------------------------------------
+    o1: Representa a cada elemento de la lista de getAreas
+    o2: Representa al area de la solicitud
+    -------------------------------------------------------*/
+    if (o1 === undefined && o2 === undefined){
+      return true;
+    }
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false: o1.id===o2.id;
   }
 
 }

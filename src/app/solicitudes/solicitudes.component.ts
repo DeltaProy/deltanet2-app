@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Solicitud } from './solicitud';
 import { SolicitudService } from './solicitud.service';
+import { ModalService } from './detalle/modal.service';
 import swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,8 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SolicitudesComponent implements OnInit {
   solicitudes: Solicitud[];
+  paginador: any;
+  solicitudSeleccionada: Solicitud;
 
   constructor(private solicitudService: SolicitudService,
+    private modalService: ModalService,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -21,7 +25,10 @@ export class SolicitudesComponent implements OnInit {
         page = 0;
       }
       this.solicitudService.getSolicitudes(page)
-        .pipe().subscribe((response: any) => this.solicitudes = response.content as Solicitud[]);
+        .pipe().subscribe((response:any) => {
+          this.solicitudes = response.content as Solicitud[];
+          this.paginador = response;
+        });
     });
   }
 
@@ -53,6 +60,11 @@ export class SolicitudesComponent implements OnInit {
         )
       }
     })
+  }
+
+  abrirModal(solicitud: Solicitud){
+    this.solicitudSeleccionada = solicitud;
+    this.modalService.abrirModal();
   }
 
 }

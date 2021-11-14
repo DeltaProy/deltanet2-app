@@ -1,3 +1,4 @@
+<detalle-solicitud *ngIf="solicitudSeleccionada" [solicitud] = "solicitudSeleccionada"></detalle-solicitud>
 <div class="card">
   <div class="card-header">Solicitudes</div>
   <div class="card-body">
@@ -22,7 +23,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let solicitud of solicitudes">
-          <td>{{solicitud.id}}</td>
+          <td><button type="button" (click)="abrirModal(solicitud)"
+            class="btn btn-success btn-sm">{{solicitud.id}}</button></td>
           <td>{{solicitud.titulo}}</td>
           <td>{{solicitud.desTitulo}}</td>
           <td>{{solicitud.estado}}</td>
@@ -37,5 +39,6 @@
         </tr>
       </tbody>
     </table>
+    <paginator-nav *ngIf="paginador" [paginador]="paginador"></paginator-nav>
   </div>
 </div>

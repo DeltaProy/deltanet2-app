@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Solicitud } from './solicitud';
+import { Area } from './area';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpEvent } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -16,6 +17,10 @@ export class SolicitudService {
 
   constructor(private http: HttpClient,
               private router: Router) { }
+
+  getAreas(): Observable<Area[]> {
+    return this.http.get<Area[]>(this.urlEndPoint + '/areas');
+  }
 
   getSolicitudes(page:number): Observable<Solicitud[]>{
     return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
@@ -88,5 +93,16 @@ export class SolicitudService {
         return throwError(e);
       })
     );
+  }
+
+  subirFoto(archivo: File, id):Observable<HttpEvent<{}>>{
+    let formData = new FormData();
+    formData.append("archivo",archivo);
+    formData.append("id",id);
+
+    const req = new HttpRequest('POST',`${this.urlEndPoint}/upload`,formData,{
+      reportProgress: true
+    });
+    return this.http.request(req);
   }
 }

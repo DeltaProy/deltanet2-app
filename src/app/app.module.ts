@@ -13,6 +13,8 @@ import { FormComponent } from './solicitudes/form.component';
 import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { DetalleComponent } from './solicitudes/detalle/detalle.component';
 
 registerLocaleData(localeES,'es');
 
@@ -21,7 +23,7 @@ const routes: Routes = [
   {path: 'solicitudes', component:SolicitudesComponent},
   {path: 'solicitudes/page/:page', component:SolicitudesComponent},
   {path: 'solicitudes/form', component:FormComponent},
-  {path: 'solicitudes/form/:id', component:FormComponent},
+  {path: 'solicitudes/form/:id', component:FormComponent}
 ];
 
 @NgModule({
@@ -31,7 +33,9 @@ const routes: Routes = [
     FooterComponent,
     NavbarComponent,
     SolicitudesComponent,
-    FormComponent
+    FormComponent,
+    PaginatorComponent,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,
