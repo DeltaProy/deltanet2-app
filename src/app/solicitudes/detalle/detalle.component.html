@@ -15,7 +15,7 @@
                 <li class="list-group-item">{{solicitud.estado}}</li>
                 <li class="list-group-item">{{solicitud.area.nombre}}</li>
               </ul>
-              <div class="input-group mb-3">
+              <div class="input-group mb-3" *ngIf="authService.hasRole('ROLE_ADMIN')">
                 <input (change)="seleccionarFoto($event)" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                 <button (click)="subirImagen()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
               </div>

@@ -1,4 +1,7 @@
-<div id="wrapper">
+<div *ngIf="!authService.isAuthenticated()">
+<app-login></app-login>
+</div>
+<div id="wrapper" *ngIf="authService.isAuthenticated()">
   <app-navbar></app-navbar>
   <div id="page-wrapper" class="gray-bg dashbard-1">
     <app-header></app-header>

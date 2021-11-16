@@ -1,44 +1,52 @@
 <detalle-solicitud *ngIf="solicitudSeleccionada" [solicitud] = "solicitudSeleccionada"></detalle-solicitud>
-<div class="card">
-  <div class="card-header">Solicitudes</div>
-  <div class="card-body">
-    <h5 class="card-title">Listado de Solicitudes</h5>
-    <div class="my-2 text-left">
-      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/solicitudes/form']">
-        Crear Solicitud</button>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Solicitudes Enviadas</h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>titulo</th>
+                  <th>descripcion</th>
+                  <th>area</th>
+                  <th>estado</th>
+                  <th colspan="2" *ngIf="authService.hasRole('ROLE_ADMIN')">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let solicitud of solicitudes">
+                  <td><button type="button" (click)="abrirModal(solicitud)"
+                    class="btn btn-success btn-sm">{{solicitud.id}}</button></td>
+                  <td>{{solicitud.titulo}}</td>
+                  <td>{{solicitud.desTitulo}}</td>
+                  <td>{{solicitud.area.descrip}}</td>
+                  <td>{{solicitud.estadoSolic.descrip}}</td>
+                  <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+                    <button type="button" name="button" [routerLink]="['/solicitudes/form',solicitud.id]"
+                        class="btn btn-primary btn-sm">editar</button>
+                  </td>
+                  <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+                    <button type="button" name="eliminar" (click)='delete(solicitud)'
+                       class="btn btn-danger btn-sm">eliminar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <paginator-nav *ngIf="paginador" [paginador]="paginador"></paginator-nav>
+          </div>
+        </div>
+      </div>
     </div>
-    <div *ngIf="solicitudes?.length==0" class="alert alert-info">
-      No hay registros en la base de datos!
-    </div>
-    <table class="table table-bordered table-striped" *ngIf="solicitudes?.length>0">
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>titulo</th>
-          <th>descripcion</th>
-          <th>estado</th>
-          <th>Editar</th>
-          <th>Eliminar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let solicitud of solicitudes">
-          <td><button type="button" (click)="abrirModal(solicitud)"
-            class="btn btn-success btn-sm">{{solicitud.id}}</button></td>
-          <td>{{solicitud.titulo}}</td>
-          <td>{{solicitud.desTitulo}}</td>
-          <td>{{solicitud.estado}}</td>
-          <td>
-            <button type="button" name="button" [routerLink]="['/solicitudes/form',solicitud.id]"
-                class="btn btn-primary">editar</button>
-          </td>
-          <td>
-            <button type="button" name="eliminar" (click)='delete(solicitud)'
-               class="btn btn-danger btn-sm">eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <paginator-nav *ngIf="paginador" [paginador]="paginador"></paginator-nav>
   </div>
 </div>

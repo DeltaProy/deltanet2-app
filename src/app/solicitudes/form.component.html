@@ -45,7 +45,7 @@
                 <select [compareWith]="compararArea" class="form-control" [(ngModel)]="solicitud.area"
                    name="area" style="width:500px;">
                    <option [ngValue] = "undefined">--- seleccionar una area ---</option>
-                   <option *ngFor="let area of areas" [ngValue]="area">{{area.nombre}}</option>
+                   <option *ngFor="let area of areas" [ngValue]="area">{{area.descrip}}</option>
                  </select>
               </div>
             </div>
@@ -54,10 +54,10 @@
               <div class="col-sm-4 col-sm-offset-2">
                 <button class="btn btn-primary" role="button"
                   (click)='create()' *ngIf="!solicitud.id else elseBlock"
-                  [disabled]="solicitudForm.form.valid">Grabar cambios</button>
+                  [disabled]="!solicitudForm.form.valid">Grabar cambios</button>
                 <ng-template #elseBlock>
                   <button class="btn btn-primary" role="button"
-                    (click)='update()' [disabled]="solicitudForm.form.valid">Edidar</button>
+                    (click)='update()' [disabled]="!solicitudForm.form.valid">Edidar</button>
                 </ng-template>
               </div>
             </div>

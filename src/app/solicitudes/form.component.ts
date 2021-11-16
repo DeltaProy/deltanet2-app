@@ -4,6 +4,7 @@ import { Area } from './area';
 import { SolicitudService} from './solicitud.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
+import { AuthService } from '../usuarios/auth.service';
 
 @Component({
   selector: 'app-form',
@@ -17,6 +18,7 @@ export class FormComponent implements OnInit {
 
   constructor(private solicitudService: SolicitudService,
               private activatedRoute: ActivatedRoute,
+              private authService: AuthService,
               private router:Router) { }
 
   ngOnInit(): void {
@@ -25,10 +27,11 @@ export class FormComponent implements OnInit {
   }
 
   public create(): void{
+    this.solicitud.idcrea = 1;
     this.solicitudService.create(this.solicitud)
     .subscribe(solicitud => {
       this.router.navigate(['/solicitudes'])
-      swal('Nueva Solicitud',`Solicituid ${solicitud.titulo} creado con éxito!`,'success')
+      swal('Nueva Solicitud',`Solicitud ${solicitud.titulo} creado con éxito!`,'success')
     },
     err => {
       this.errores = err.error.errors as string[];

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthService } from './usuarios/auth.service';
+import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'deltanet-app';
+
+  constructor(public authService: AuthService, private router:Router) {}
+  logout():void{
+    let username = this.authService.usuario.username;
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }
