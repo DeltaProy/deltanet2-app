@@ -58,7 +58,7 @@ export class AuthService {
   }
 
   login(usuario: Usuario): Observable<any> {
-    const urlEndPoint = 'http://localhost:8080/oauth/token';
+    const urlEndPoint = 'http://173.255.202.95:8085/oauth/token';
     const credenciales = btoa('deltanetapp' + ':' + 'D3lt@372');
     const httpHeaders = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded',
           'Authorization':'Basic ' + credenciales});

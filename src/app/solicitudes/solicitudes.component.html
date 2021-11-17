@@ -13,6 +13,9 @@
         </div>
         <div class="ibox-content">
           <div class="table-responsive">
+            <div class="my-2 text-left" *ngIf="authService.hasRole('ROLE_ADMIN')">
+              <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/solicitudes/form']">Crear Solicitud</button>
+            </div>
             <table class="table table-striped">
               <thead>
                 <tr>

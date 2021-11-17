@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
   providedIn: 'root'
 })
 export class SolicitudService {
-  private urlEndPoint:string = 'http://localhost:8080/apiSolic/solicitudes';
+  private urlEndPoint:string = 'http://173.255.202.95:8085/apiSolic/solicitudes';
 
   constructor(private http: HttpClient,
               private router: Router,
